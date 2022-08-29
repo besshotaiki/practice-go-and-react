@@ -1,0 +1,58 @@
+@startuml
+  entity Company{
+
+  }
+  entity Event{
+
+  }
+  entity Ticket{
+    *ticketId
+    --
+    possessionId
+  }
+  entity User{
+    *userId
+    --
+    name
+  }
+  entity Possession{
+    *possessionId
+    -- 
+
+  }
+  entity PossessionUser{
+    *possessionUserId
+    --
+    possessionId
+    userId
+  }
+  entity UseUser{
+    *useUserId
+    --
+    ticketId
+    userId
+  }
+  entity TransferHistory{
+    transferHistoryId
+    --
+    transferId
+    transfed_at
+    transfer_at
+    possessionId_from
+    possessionId_to
+  }
+  entity Transfer{
+    transferId
+    --
+    ticketId
+  }
+  Company ||--o{Event
+  Event ||--o{Ticket
+  Possession ||--o| PossessionUser
+  Possession |o--|{Ticket
+  User ||--o| PossessionUser
+  User ||--o| UseUser
+  Ticket ||--o| UseUser
+  Transfer }o--||Ticket
+  Transfer ||--||TransferHistory
+@enduml
