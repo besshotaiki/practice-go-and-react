@@ -17,7 +17,7 @@ const Movies = () => {
 				setMovies(tmpData)
 			}
 		)()
-	}, []) // 空配列を第二引数に渡すとマウント・アンマウント時のみ第１引数の関数を実行
+	}, [])
 	return (
 		<Fragment>
 			<h2>Choose a movie</h2>

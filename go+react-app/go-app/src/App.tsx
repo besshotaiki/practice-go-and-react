@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Link, useMatch} from 'react-rou
 import Home from './components/Home'
 import Movies from './components/Movies'
 import Admin from './components/Admin'
-import { AnyPtrRecord } from 'dns'
 import Categories from './components/Categories'
 import OneMovie from './components/OneMovie'
 
