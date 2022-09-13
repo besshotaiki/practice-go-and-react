@@ -44,7 +44,7 @@ export default function App() {
               />
               <Route
                 path="/movies/:id"
-                component={<OneMovie />}
+                element={<OneMovie />}
               />
               <Route
                 path="/by-category"
@@ -52,11 +52,11 @@ export default function App() {
               />
               <Route
                 path="/by-category/comedy"
-                render={(props) => <Categories {...props} title={`Comedy`}/>}
+                element={<Categories title="Comedy"/>}
               />
               <Route
                 path="/by-category/drama"
-                render={(props) => <Categories {...props} title={`Drama`}/>}
+                element={<Categories title="Drama" />}
               />
               <Route
                 path="/admin" 
