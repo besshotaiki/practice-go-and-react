@@ -1,14 +1,18 @@
-FROM node:14.9.0-alpine3.10
+# Dockerfile-golang
+FROM golang:1.16
  
-CMD ["/bin/sh"]
+WORKDIR /app
  
-ENV PROJECT /go-app
+COPY go-app/go.mod .
+COPY go-app/go.sum .
  
-WORKDIR ${PROJECT}
+# airの設定ファイルをコピー
+COPY go-app/*air.toml .
  
-RUN apk update && \
-    npm install -g create-react-app
+RUN go mod download
  
-ADD ${PROJECT}/package.json ${PROJECT}
+COPY ./go-app .
  
-RUN npm install
+RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+ 
+CMD ["air"]

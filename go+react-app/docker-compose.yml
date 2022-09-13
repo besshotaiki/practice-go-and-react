@@ -1,9 +1,17 @@
 version: "3.3"
 services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./golang/Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./go-app:/app
   frontend:
     build:
       context: .
-      dockerfile: "./react/Dockerfile"
+      dockerfile: ./react/Dockerfile
     volumes:
       - ./react-app:/react-app
     command: >
