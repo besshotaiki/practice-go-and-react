@@ -12,7 +12,7 @@ const OneMovie = (props: any) => {
 		(
 			() => {
 				setMovie({
-					id: props.match.id,
+					id: props.id,
 					title: "Some movie",
 					runtime: 150,
 				})

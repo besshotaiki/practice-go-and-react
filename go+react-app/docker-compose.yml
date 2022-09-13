@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: "./react/Dockerfile"
     volumes:
-      - ./go-app:/go-app
+      - ./react-app:/react-app
     command: >
       sh -c "npm run start"
     ports:
