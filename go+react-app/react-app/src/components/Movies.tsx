@@ -1,35 +1,54 @@
 import { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Movie } from '../models/movie'
+import axios from 'axios'
 
 const Movies = () => {
-	const tmpData = [
-		{id: 1, title: "The Shawshank Redemption", runtime: 142},
-		{id: 2, title: "Harry Potter", runtime: 175},
-		{id: 3, title: "The Dark Kngiht", runtime: 142},
-	]
- 
 	const [movies, setMovies] = useState<Movie[]>([])
- 
+	const [isLoaded, setIsLoaded] = useState(false)
+	const [error, setError] = useState("")
+
 	useEffect(() => {
 		(
-			() => {
-				setMovies(tmpData)
+			async () => {
+				await axios.get('movies')
+					.then((response) => {
+						setMovies(response.data.movies)
+						setIsLoaded(true)
+					})
+					.catch((err) => {
+						setError(err.message)
+					})
 			}
 		)()
 	}, [])
+ 
+	if (error) {
+		return (
+			<div>Error: {error}</div>
+		)
+	} else if (!isLoaded) {
+		return (
+			<p>Loading...</p>
+		)
+	}
+
 	return (
 		<Fragment>
 			<h2>Choose a movie</h2>
-			<ul>
+			<div className="list-group">
 				{movies.map((m) => {
 					return (
-						<li key={m.id}>
-							<Link to={`/movies/${m.id}`}>{m.title}</Link>
-						</li>
+						<Link
+						  key={m.id}
+						  to={`/movies/${m.id}`}
+						  className="list-group-item list-group-item-action"
+						>
+							{m.title}
+						</Link>
 					)
 				})}
-			</ul>
+			</div>
 		</Fragment>
 	)
 }

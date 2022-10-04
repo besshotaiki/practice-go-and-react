@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Routes, Route, Link, useMatch} from 'react-rou
 import Home from './components/Home'
 import Movies from './components/Movies'
 import Admin from './components/Admin'
-import Categories from './components/Categories'
+import Genres from './components/Genres'
 import OneMovie from './components/OneMovie'
+import OneGenre from './components/OneGenre'
+import EditMovie from './components/EditMovie'
 
 export default function App() {
   return (
@@ -27,7 +29,10 @@ export default function App() {
                   <Link to="/movies">Movies</Link>
                 </li>
                 <li className="list-group-item">
-                  <Link to="/by-category">Categories</Link>
+                  <Link to="/genres">Genres</Link>
+                </li>
+                <li className="list-group-item">
+                  <Link to="/admin/add">Add Movie</Link>
                 </li>
                 <li className="list-group-item">
                   <Link to="/admin">Manage Catalog</Link>
@@ -47,16 +52,16 @@ export default function App() {
                 element={<OneMovie />}
               />
               <Route
-                path="/by-category"
-                element={<CategoryPage />}
+                path="/admin/add"
+                element={<EditMovie/>}
               />
               <Route
-                path="/by-category/comedy"
-                element={<Categories title="Comedy"/>}
+                path="/genres"
+                element={<Genres />}
               />
               <Route
-                path="/by-category/drama"
-                element={<Categories title="Drama" />}
+                path="/genre/:id"
+                element={<OneGenre />}
               />
               <Route
                 path="/admin" 
@@ -71,17 +76,5 @@ export default function App() {
         </div>
       </div>
     </Router>
-  )
-}
-const CategoryPage = () => {
-  return (
-    <div>
-      <h2>Categories</h2>
- 
-      <ul>
-        <li><Link to={`/by-category/comedy`}>Comedy</Link></li>
-        <li><Link to={`/by-category/drama`}>Drama</Link></li>
-      </ul>
-    </div>
   )
 }
